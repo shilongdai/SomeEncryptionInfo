@@ -1,0 +1,59 @@
+The Playfair is one of the best known multi-letter encryption ciphers. Unlike simple substitution ciphers, Playfair encrypts two letters at a time. For simple substitution ciphers, there are only 26 letters. Playfair has 26 * 26 digrams. It makes the identification more difficult. Playfair increases the range of letter frequencies in the encrypted output, which makes cryptoanalysis based on letter frequencies harder. For these reasons, Playfair cipher was considered secure for a long time. It was used by the British during the late 19th century, World War 1, and World War 2.
+
+Playfair uses a 25 by 25 key table for encryption. The key table is constructed from a keyword. The keyword is filled into the table from left to right and top to bottom letter by letter. Any duplicate letters in the keyword would be removed. The remaining space would be padded with letters not in the keyword in alphabetical order. The following table is an example of a Playfair key table constructed with "pasword":
+
+The "password" table:
+
+P	A	S	W	O
+R	D	B	C	E
+F	G	H	I/J	K
+L	M	N	Q	T
+U	V	X	Y	Z
+ 
+
+To encrypt a message, use the following set of rules in order:
+
+Repeating plaintext letters that would fall in the same pair are separated with a filler letter, such as "x." "Balloon," for example, becomes "ba lx lo on."
+If the last letter cannot form a pair, append a filler letter, such as "x." "Did," for example, becomes "di dx."
+Plaintext pair letters that fall in the same row are each replaced with the letter to the right, with the first letter of the row circularly following the last. Using the "password" table, "WO" becomes "OP," and "AS" becomes "SW."
+Plaintext pair letters that fall in the same column are each replaced with the letter beneath, with the top letter of the column circularly following the last. Using the "password" table, "LU" becomes "UP," and "RF" becomes "FL."
+Otherwise, the plaintext letter pair forms a rectangle on the table. Each letter in the pair is replaced by the letter horizontally across the rectangle. Using the "password" table. The order of the plaintext matters. Using the "password" table, "MB" becomes "ND."
+The "password" table is used below to encrypt "example." After applying the first step of operation, "example" becomes "ex am pl ex." Then,
+
+using "password" table to encrypt "EX":
+
+P	A	S	W	O
+R	D	B	C	E
+F	G	H	I/J	K
+L	M	N	Q	T
+U	V	X	Y	Z
+"E" and "X" form a rectangle. Going horizontally across, "E" becomes "B," and "X" becomes "Z."
+
+using "password" table to encrypt "AM":
+
+P	A	S	W	O
+R	D	B	C	E
+F	G	H	I/J	K
+L	M	N	Q	T
+U	V	X	Y	Z
+"AM" is in the same column. Thus, the letters are shifted down by one. "AM" becomes "DV."
+
+using "password" table to encrypt "PL":
+
+P	A	S	W	O
+R	D	B	C	E
+F	G	H	I/J	K
+L	M	N	Q	T
+U	V	X	Y	Z
+"PL" is in the same cloume. It becomes "RU."
+
+using "password" table to encrypt "EX":
+
+P	A	S	W	O
+R	D	B	C	E
+F	G	H	I/J	K
+L	M	N	Q	T
+U	V	X	Y	Z
+"EX" forms a rectangle. It is substituted to "BZ."
+
+In the end, "example" is encrypted to "BZDVRUBZ." To decrypt the content, apply rules 2-5 in reverse order for each pair. For rule 1, simply remove any extraneous padding letters after step 2-5. For long messages, random spaces and punctuations are added to the final cipher text to increase the difficulty of identification. For example, "BZDVRUBZ" can become something like "B, ZDVR. UB; Z." The receiving end knows that it is Playfair encrypted. Thus, he will ignore the extra spaces and punctuations.
