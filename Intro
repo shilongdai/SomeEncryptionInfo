@@ -1,0 +1,22 @@
+In this interconnected world of electronics, digital storage, and network, of electronic eavesdropping and fraud, information security is an unavoidable topic. Before the advancement of digital technologies, security was guaranteed primarily by physical and administrative means. After the widespread of data processing equipment, it is clear that automated methods of protecting information become necessary. Modern cryptography and network security are tools to protect credentials, credits, privacy, and integrity. As the awareness of the need to safeguard data rises, the field of cryptography and network security have matured. In the current days, there is a broad range of readily available techniques and applications to enforce security. There are some important concepts:
+
+1. Confidentiality
+It ensures that information in a system or transmission can only be read or accessed by authorized parties. It could also include concealing the fact that the information exists. A violation of this principle means that a third party could intercept a message or acquire a storage device, then retain sensitive information from the medium. For example:
+
+Person A is shopping online and proceeds to checkout. After input payment information, he clicks "submit" and sends the request to the server. Person B intercepts the request and gets Person A's credit card and address information. He can then use this information to do anything and even sells the information before person A notices.
+
+Protecting sensitive information from third parties are vital when many crucial tasks can be done digitally. Anything that is stored on an electronic device is at risk. To protect such vulnerability, encryption algorithms, and some other methods have been created to ensure the secrecy of information.
+
+2. Authentication
+It ensures that the origin of a message, transmission, or electronic document is from whom the sender or source claim to be. It enforces that the identity of people, organizations, company, and government assets are correct. Without authentication, it is impossible to distinguish fraud from actual messages and imposter from the truth. An example of exploit would be a phishing attack:
+
+Person A receives an email containing a fake Facebook friend request. When he click on the login link, it brings him to another site that looks exactly like the Facebook login page. Not knowing the page is not Facebook, Person A typed in his credentials. Now, the malicious phisher has his username and password.
+
+With authentication mechanism, it can be checked that whether an email, a website, a message, or any other medium is truly from where it claims to be the origin. The mechanism includes but not limited to encryption, message authentication code, and signature.
+
+3. Integrity
+It ensures that only authorized party can modify, create, delete, or replay digital contents. It ensures that message transmitted over the network or remained on storage has been left intact and not manipulated. Integrity violation can have deadly consequences. Without protection, anyone could modify information that is sent or stored without being detected. For example:
+
+A bank is making a transaction of deposit. It sends a message to its backend. But, on the network, the "account" and "amount" in the message is altered. Without detection mechanism, the hacker withdrawals the money.
+
+Integrity is often enforced by message authentication code, hash, or a combination of methods.
