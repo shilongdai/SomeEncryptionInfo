@@ -1,0 +1,55 @@
+Caesar Cipher is the earliest and the simplest use of a substitution cipher. It was employed by Julius Caesar hence the name "Caesar Cipher".
+Historically, Caesar Cipher replaces letters in the plaintext with letters three places down the alphabet, circulating the end of the alphabet back to the beginning. For example:
+
+CAESAR becomes FDHVDU
+
+Caesar Cipher encrypts letters one at a time using one technique. Therefore, it is called a monoalphabetic simple substitution cipher. Monoalphabetic means that it applies one rule for all the plaintext, and simple substitution means that it substitute letters one by one. If English alphabets are encoded to integers ranging from 0 to 25 based on alphabetical order, the generic form of Caesar Cipher is:
+
+C = E(p) = (p + k) mod(26) where k = a value in the range [1,25]
+
+p = D(C) = (C - k) mod(26) where k = a value in the range [1,25]
+
+C = the ciphered letter
+E = the Caesar Cipher encryption function
+p = the plaintext letter
+k = the shift count, between 1 to 25
+mod(26) = the remainder, dividing (p+k) or (C-k) by 26
+D =the Casear Cipher decryption funtion
+
+Caesar cipher is not a secure cipher. Since:
+
+The encryption algorithm is easily known
+There are only 25 possible key
+The plaintext is in a known and easily recognizable language
+Cryptoanalysis possible by analyzing letter frequencies
+A brute-force attack can be performed quickly by trying out all 25 possible keys. For example:
+
+Cipher text: GUVF VF ZL FRPERG ZRFFNTR.
+
+Key #1: FTUE UE YK EQODQF YQEEMSQ.
+Key #2: ESTD TD XJ DPNCPE XPDDLRP.
+Key #3: DRSC SC WI COMBOD WOCCKQO.
+Key #4: CQRB RB VH BNLANC VNBBJPN.
+Key #5: BPQA QA UG AMKZMB UMAAIOM.
+Key #6: AOPZ PZ TF ZLJYLA TLZZHNL.
+Key #7: ZNOY OY SE YKIXKZ SKYYGMK.
+Key #8: YMNX NX RD XJHWJY RJXXFLJ.
+Key #9: XLMW MW QC WIGVIX QIWWEKI.
+Key #10: WKLV LV PB VHFUHW PHVVDJH.
+Key #11: VJKU KU OA UGETGV OGUUCIG.
+Key #12: UIJT JT NZ TFDSFU NFTTBHF.
+Key #13: THIS IS MY SECRET MESSAGE.
+Key #14: SGHR HR LX RDBQDS LDRRZFD.
+Key #15: RFGQ GQ KW QCAPCR KCQQYEC.
+Key #16: QEFP FP JV PBZOBQ JBPPXDB.
+Key #17: PDEO EO IU OAYNAP IAOOWCA.
+Key #18: OCDN DN HT NZXMZO HZNNVBZ.
+Key #19: NBCM CM GS MYWLYN GYMMUAY.
+Key #20: MABL BL FR LXVKXM FXLLTZX.
+Key #21: LZAK AK EQ KWUJWL EWKKSYW.
+Key #22: KYZJ ZJ DP JVTIVK DVJJRXV.
+Key #23: JXYI YI CO IUSHUJ CUIIQWU.
+Key #24: IWXH XH BN HTRGTI BTHHPVT.
+Key #25: HVWG WG AM GSQFSH ASGGOUS.
+
+Note that message #13 is in English.
