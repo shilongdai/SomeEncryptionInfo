@@ -1,0 +1,182 @@
+The VIC cipher is one of the most complicated and secure hand ciphers that was ever made in history. The cipher was used by at least one USSR spies when it was exposed. The technical name of the cipher is "straddling bipartite monoalphabetic substitution superenciphered by modified double transposition." A ciphertext was found in 1953 on a microfilm inside a hollow Nickel. Initially, Cryptoanalysis by the NSA on this cipher did not confirm that it is a hand cipher. Although it is not as complex or secure as a modern computer cipher, it resisted cryptanalysis from the NSA until 1957. At that time, the NSA was able to break some of the messages encrypted with the one-time pad from some other Soviet agents. However, this cipher remained unbroken until Häyhänen, the Soviet spy, defected to the US and revealed the method in 1957. The VIC cipher is probably one of the last working hand cipher created before the advancement in the computer.
+
+The original ciphertext:
+
+
+
+There are four pieces to the key for this cipher:
+
+A short phrase containing the common letters in the language of the plaintext. Repeated letters in the phrase would be removed. The final phrase should be less than or equal to 8 letters. For English, the phrase would be something like "a sin to er."
+A 20 letter key phrase (Historically, this was a line from a song)
+A date (Historically, this was the Soviet VJ-day) in numerical form
+The agent number
+There are four steps to the cipher:
+
+Derive the intermediate keys from the key information
+Create the straddling checkerboard to encode the message into digits
+Apply the transposition tables
+Finalize the message
+To demonstrate the cipher, the key information would be:
+
+the short phrase: "a sin to er"
+the 20 letter key phrase: "put on your thinking cap"
+the date September 2, 1945 -> 921945
+agent number 05
+The message to be encrypted: You have been discovered destroy the document and retreat
+
+Step 1: Intermediate keys
+First, two lines of digits, A and B, needs to be generated from the 20 letter key phrase. The 20 letter key phrase is split into two 10 letter phrase from the middle. Each 10 letter phrase is then sequentialized. Sequentializing is a process to transform a set of N numbers or alphabets to a permutation of 1, 2, 3, 4, 5, ..., N. To sequentialize, start with 1 and label each number or alphabet in numerical or alphabetical order. Duplicates are labeled from left to right with increasing number. In this cipher, 10 is sometimes represented as 0, like in this case.
+
+First Half: P U T O N Y O U R T
+         A: 4 9 6 2 1 0 3 8 5 7
+
+Second Half: H I N K I N G C A P
+          B: 4 5 8 7 6 9 3 2 1 0
+After dividing and sequentializing the two halves of the key phrase, the agent needs to think of a 5 digits random number C. During the last stage, C would be inserted into the ciphertext, so the agent does not need to remember it. The first 5 digits of the date would be subtracted from C digit by digit without borrowing.
+
+C: 5 4 2 1 3
+
+   5 4 2 1 3
+  -9 2 1 9 4 
+E: 6 8 1 2 9
+The result of the subtraction, E,  would be expanded to 10 digits using chain addition. To perform chain addition, add the first digit to the second digit without carrying and append the resulting digits to the end. Then, add the second digit to the third without carrying and append the result digit to the end and so on... The process stops when the specified length of total digits is reached. In this case, 10 digits will be generated:
+
+E: 6 8 1 2 9
+becomes:
+F: 6 8 1 2 9 4 9 3 1 3
+The result of the expansion, F,  is added digit by digit to A without carrying. The result is G.
+
+  6 8 1 2 9 4 9 3 1 3
+ +4 9 6 2 1 0 3 8 5 7
+G:0 7 7 4 0 4 2 1 6 0
+Next, an encoding pattern is created from B. Digits from 1-9 are mapped to B digits in order.
+
+Digits ->  B
+1      ->  4
+2      ->  5
+3      ->  8
+4      ->  7
+5      ->  6
+6      ->  9
+7      ->  3
+8      ->  2
+9      ->  1
+0      ->  0
+This encoding pattern would be used to encode G into H.
+
+G: 0 7 7 4 0 4 2 1 6 0 
+becomes:
+H: 0 3 3 7 0 7 5 4 9 0
+H is then used to create 50 digits arranged in rows of 10 through chain addition. H itself is not part of the output. The result is the I block. Then, H is sequentialized to form the column label J.
+
+H : 0 3 3 7 0 7 5 4 9 0
+J : 8 1 2 5 9 6 4 3 7 0
+I : 3 6 0 7 7 2 9 3 9 3
+    9 6 7 4 9 1 2 2 2 2
+    5 3 1 3 0 3 4 4 4 7
+    8 4 4 3 3 7 8 8 1 5
+    2 8 7 6 0 5 6 9 6 7
+The last 2 digits of the I block, 6 and 7, are seperatly added to the agent number to find the width of the 2 transposition table or the width of the 2 keys.
+
+agent number: 05
+Width of the first table or Width of K1: 5 + 6 = 11
+Width of the second table or Width of K2: 5 + 7 = 12
+Then, write the I block out by columns (columns marked by J), starting from column '1.'
+
+U Block By Columns: 66348 07147 32489 92486 74336 21375 92416 39582 79030 32757
+The first subkey for transposition, K1, is the first 11 digits (see above calculation for 11) of the I Block By Columns after sequentialization. The second subkey for transposition, K2, is the sequentialized 12 digits (see above calculation for 12) after K1 digits. In this case, 0 is counted as 10 in the pre-sequentialized subkey, while 10 is still 10 in the post-sequentialized subkey (K1 and K2).
+
+K1 Before Sequentialization: 6 6 3 4 8  0  7 1 4 7 3
+                         K1: 6 7 2 4 10 11 8 1 5 9 3
+
+K2 Before Sequentialization: 2 4 8 9  9  2 4 8  6 7 4 3
+                         K2: 1 4 9 11 12 2 5 10 7 8 6 3
+Step 2: Straddling Checkerboard
+The last line of I, I5, is sequentialized to form L.
+
+I5: 2 8 7 6 0 5 6 9 6 7
+ L: 1 8 6 3 0 2 4 9 5 7
+Next, the straddling checkerboard is constructed with L, the short phrase "a sin to er," and the agent number. The L becomes the top row or the column label of the checkerboard. The short phrase "a sin to er" becomes the second row. The agent number is the row label for the third and fourth row from the top. The third and fourth row are filled with alphabets that are not in "a sin to er" in alphabetical order column by column vertically. One important note is that you must leave the last two spaces in the second row blank. There should be no space in the phrase "a sin to er" or any other phrase. The last two digits in L are used to label the third and fourth row for coordinate. Any remaining spaces in the third or fourth row after filling in the letters can be used for special characters that both the sender and receiver agrees on. Conventionally, the '#' sign usually indicates a number that follows the sign; two '..' together indicates the true start of the message.
+
+ 	1	8	6	3	0	2	4	9	5	7
+ 	A	S	I	N	T	O	E	R	 	 
+5	B	D	G	J	L	P	U	W	Y	#
+7	C	F	H	K	M	Q	V	X	Z	..
+The plaintext message is broken into two pieces at a random location. The two pieces are then swapped. The '..' symbol is added before the actual beginning of the message to indicate the starting point.
+
+YOU HAVE BEEN DISCOVERED DESTROY THE DOCUMENT AND RETREAT
+becomes:
+ROY THE DOCUMENT AND RETREAT .. YOU HAVE BEEN DISCOVERED DEST
+The transformed message is then encoded into digits by the checkerboard. For each letter of the message, if the letter can be found on the second row of the checkerboard ("a sin to er"), the letter becomes the column label (C) above it. For example, A would become 1. If the letter is in the third or the fourth row, the letter becomes its row label digit and column label digit. For example, G becomes 56. After the checkerboard, the message becomes:
+
+9255 0764 582715470430 1358 9409410 77 55254 761744 51443 58687127449458 58480
+If the message is not a multiple of 5, append padding to the end until the message is a multiple of 5. The padding should be agreed by both the sender and the receiver. For this message, '57's are appended to the message, so the message length becomes 70.
+
+9255 0764 582715470430 1358 9409410 77 55254 761744 51443 58687127449458 5848057
+Step 3: Transpositions
+The first transposition table is constructed from the K1 and the message. The K1 becomes the column label of the table, and the message is filled into the table horizontally with equal length rows.
+
+     K1: 6 7 2 4 10 11 8 1 5 9 3
+Message: 9 2 5 5  0  7 6 4 5 8 2
+         7 1 5 4  7  0 4 3 0 1 3
+         5 8 9 4  0  9 4 1 0 7 7
+         5 5 2 5  4  7 6 1 7 4 4
+         5 1 4 4  3  5 8 6 8 7 1
+         2 7 4 4  9  4 5 8 5 8 4 
+         8 0 5 7
+To transpose the message, write the message digits out by columns instead of rows starting from column '1' labeled by K1.
+
+Message After Transposition 1:
+431168 5592445 237414 5445447 500785 9755528 2185170 644685 817478 070439 709754
+The second transposition table is a disrupted transposition. The disruption pattern is based on the width of the table and the key K2. Here is an example with a width of 6 with irrelevant information as X.
+
+K2: X 3 1 X 2 X
+    X X
+    X X X  
+    X X X X
+    X X X X X
+    X X X X X X
+    X X X X
+    X X X X X 
+    X X X X X X
+    X
+    X X
+    X X X    
+    X X X X 
+    X X X X X
+    X X X X X X
+Xs begin at the start and continue until '1' is reached. Then, the width of Xs increases by one each row until the width of Xs equals the width of the table. Then, on the next row, Xs continues until '2' is reached. The width of Xs increases by one each row until the width of Xs equals the width of the table and so on. If the key digits run out, the pattern starts again using key digit '1.' For the cipher, the message digits after transposition 1 are copied into the table where the Xs are in step 1. The blanks are left intact. In step 2, the remaining leftover message from step 1 is copied into the blank area.
+
+For the table to work, the height of the table must be calculated so the pattern stops at proper location. It is done via dividing the length of the message by the length of K2. In this case, 70 / 12 = 5 with 10 as remainder. This means that 6 rows are required. The last row would contain 10 digits. Thus, the pattern stops after the third row. After finding the height, the message can be copied into the table using the disruption pattern.
+
+Step 1:
+
+     K2: 1 4 9 11 12 2 5 10 7 8 6 3
+Message: 4 3 1  1  6
+         8 5 5  9  2 4
+         4 5 2  3  7 4 1
+         4 5 4  4  5 4 4  7
+         5 0 0  7  8 5 9  7 5
+         5 5 2  8  2 1 8  5 1 7
+Step 2 (remaining digits in the message from step 1 are in bold):
+
+     K2: 1 4 9 11 12 2 5 10 7 8 6 3
+Message: 4 3 1  1  6 0 6  4 4 6 8 5
+         8 5 5  9  2 4 8  1 7 4 7 8
+         4 5 2  3  7 4 1  0 7 0 4 3
+         4 5 4  4  5 4 4  7 9 7 0 9
+         5 0 0  7  8 5 9  7 5 7 5 4
+         5 5 2  8  2 1 8  5 1 7
+Just like transposition 1, copy the message by columns starting on column '1.' Arrange the result into groups of 5 digits.
+
+Pre-Final: 48445 50444 51583 94355 50568 14988 
+           74054 77951 64077 71524 02410 77519
+           34786 27582
+Step 4: Finalize
+Recall that only 5 digits of date are used at the beginning. The 6th digit of the date indicates the distance of groups that the C should be inserted from the end. In this case, the Message Indicator should be the 5th place from the end.
+
+Final Encrypted Ciphertext: 48445 50444 51583 94355 50568 14988 
+                            74054 77951 64077 71524 54213 02410 
+                            77519 34786 27582
+Decryption
+To decrypt the ciphertext, extract and remove the Message Indicator from the ciphertext using the date. Then, calculate the keys from the key information. Finally, do Steps 3-2 in reverse to get the plaintext.
