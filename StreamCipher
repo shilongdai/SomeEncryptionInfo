@@ -1,0 +1,47 @@
+Stream Cipher is a modern approach to secure data over mediums. Typically, stream ciphers only ensure confidentiality. It is also harder to use correctly compared to block ciphers. However, a stream cipher is usually simple, efficient, and easy to synchronize. Due to its nature, it can encrypt while sending as well as decrypt while receiving data. Those benefits make stream cipher useful for a situation requiring high data rate, simple hardware implementation, or indeterminate message length, such as wireless encryption.
+
+A stream cipher is related to the one-time pad, an unbreakable cipher using a truly random key to encrypt plaintext. The one-time pad is incredibly simple: The plaintext is combined with the key bit by bit or character by character using modular addition. However, the security of the one-time pad depends entirely on the randomness of the key. The key must be truly random and must not be used twice. If the key is completely random and secret, it is impossible for an attacker to analyze the ciphertext because there are no correlation between the plaintext and ciphertext. The ciphertext would be equivalent to a random stream of symbols. It is also impossible to brute-force a one-time pad. If brute-force is attempted, the ciphertext could be decrypted to any value. For a 5 letter ciphertext, the plaintext "small" and "large" are both equally plausible. Therefore, the one-time pad is defined as theoretically secure, which means that it can not be broken even with infinite computational power.
+
+In modern ciphers, the addition operation is performed via the integer ring mod 2 or the XOR function.
+
+Integer Ring mod 2 addition table
+ 
+0
+1
+0
+0
+1
+1
+1
+0
+If one of the operands is random, the sum has a 50% probability of 0 and a 50% probability of 1. If one of the operands is unpredictable, it is impossible to determine the other operand from the result. In the integer ring mod 2, every element x satisfies x + x = 0. Thus, x is the additive inverse of itself. Therefore, addition and subtraction are the same operations.
+
+Although one-time pad cipher itself is impossible to break, it has preconditions:
+
+The key must be truly random and unpredictable
+The key must be the same length as the plaintext
+The key must not be reused
+The key must remain secret
+Due to its strict requirements, the problem of using one-time pad is not a problem of the cipher itself, but questions such as the transmission of the key, the generation of the key, the prevention of key reuse, the disposal of the key, etc. Those problems make it impractical to use the one-time pad in many situations. However, one-time pad inspired the creation of stream ciphers.
+
+Stream cipher also encrypts messages with a modular addition similar to the one-time pad. However, it does not require a random key that is as long as the plaintext. It is essentially a cryptographic pseudo-random number generator that uses the key as the seed and generates a pseudo-random keystream. The keystream is as long as the message itself and needs to be unpredictable and unbiased. It must be infeasible for an attacker to discover the key or internal state of the cipher from the keystream. The keystream is then XORed to the plaintext just like the one-time pad. Here, "unpredictable" means that if an attacker is able to acquire or guess a part of the keystream (or the entire current keystream), it is infeasible to generate the next parts of the keystream or to solve the previous parts of the keystream without the key. Here, "unbiased" means that the ciphertext should be indistinguishable from random noise. If a stream cipher satisfies all the requirements, it is computationally secure: impossible to break under a realistic time frame using the best techniques with the current computer technologies.
+
+Due to the encryption method of the stream cipher, it has a critical requirement regarding key usage. To guarantee the uniqueness of the keystream, the key (and/or the nonce if needed) must only be used for once. If the key has to be reused, the nonce must not repeat. If the keystream repeats, it becomes trivial to solve part or all of the ciphertext with some known plaintext. The encryption function for a stream cipher is E(P) (mod 2) ≡ P + S. If the keystream is reused, the two ciphertext C1 and C2, would be:
+
+C1 (mod 2) ≡ A + S
+
+C2 (mod 2) ≡ B + S
+
+XOR the two together,
+
+K (mod 2) ≡ C1 + C2
+
+K (mod 2) ≡ A + B + S + S
+
+S = -S in the integer ring mod 2.
+
+K (mod 2) ≡ A + B
+
+If the attacker knows the content of one of the message, solving for the unknown content is simply B (mod 2) ≡ K(known) + A (known). Even if both of the messages is unknown, the attacker would still be able to guess the plaintext via statistical properties of the plaintext. This is a major issue with the usage of the stream cipher. Unlike the block ciphers, the key (or nonce) must be only used once. This problem actually happened in real life. In fact, Microsoft has misused the stream cipher RC4 in its Microsoft Office (http://eprint.iacr.org/2005/007.pdf).
+
+A stream cipher is a secure method of protecting data confidentiality (most of them do not protect the integrity or authenticity). As of now, it appears that cryptographers are more capable of producing secure block cipher than stream cipher, and the stream ciphers are generally less common. However, stream ciphers are straightforward and fast. They are also secure pseudo-random number generators. Furthermore, block cipher modes such as OFB, CFB, and CTR converts a block cipher into a stream cipher. Thus, it is important to know about the properties of stream cipher to know how to use them correctly and when to use them.
