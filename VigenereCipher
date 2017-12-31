@@ -1,0 +1,46 @@
+Vigenere Cipher is one of the best known and simplest polyalphabetic ciphers. Polyalphabetic means that a set of monoalphabetic substitution rules instead of one rule is used. The key would determine which rule is selected for a transformation. Since multiple monoalphabetic substitutions are used, and each plaintext letter could correspond to multiple ciphered letters, polyalphabetic ciphers further obscure the frequencies of letters in the plaintext.
+The Vigenere Cipher is constructed with 26 Caesar Cipher using keys from 0 to 25. Each cipher is laid horizontally row by row. The the table is as below:
+
+The Modern Vigenere Table:
+
+ 	a	b	c	d	e	f	g	h	i	j	k	l	m	n	o	p	q	r	s	t	u	v	w	x	y	z
+a	A	B	C	D	E	F	G	H	I	J	K	L	M	N	O	P	Q	R	S	T	U	V	W	X	Y	Z
+b	B	C	D	E	F	G	H	I	J	K	L	M	N	O	P	Q	R	S	T	U	V	W	X	Y	Z	A
+c	C	D	E	F	G	H	I	J	K	L	M	N	O	P	Q	R	S	T	U	V	W	X	Y	Z	A	B
+d	D	E	F	G	H	I	J	K	L	M	N	O	P	Q	R	S	T	U	V	W	X	Y	Z	A	B	C
+e	E	F	G	H	I	J	K	L	M	N	O	P	Q	R	S	T	U	V	W	X	Y	Z	A	B	C	D
+f	F	G	H	I	J	K	L	M	N	O	P	Q	R	S	T	U	V	W	X	Y	Z	A	B	C	D	E
+g	G	H	I	J	K	L	M	N	O	P	Q	R	S	T	U	V	W	X	Y	Z	A	B	C	D	E	F
+h	H	I	J	K	L	M	N	O	P	Q	R	S	T	U	V	W	X	Y	Z	A	B	C	D	E	F	G
+i	I	J	K	L	M	N	O	P	Q	R	S	T	U	V	W	X	Y	Z	A	B	C	D	E	F	G	H
+j	J	K	L	M	N	O	P	Q	R	S	T	U	V	W	X	Y	Z	A	B	C	D	E	F	G	H	I
+k	K	L	M	N	O	P	Q	R	S	T	U	V	W	X	Y	Z	A	B	C	D	E	F	G	H	I	J
+l	L	M	N	O	P	Q	R	S	T	U	V	W	X	Y	Z	A	B	C	D	E	F	G	H	I	J	K
+m	M	N	O	P	Q	R	S	T	U	V	W	X	Y	Z	A	B	C	D	E	F	G	H	I	J	K	L
+n	N	O	P	Q	R	S	T	U	V	W	X	Y	Z	A	B	C	D	E	F	G	H	I	J	K	L	M
+o	O	P	Q	R	S	T	U	V	W	X	Y	Z	A	B	C	D	E	F	G	H	I	J	K	L	M	N
+p	P	Q	R	S	T	U	V	W	X	Y	Z	A	B	C	D	E	F	G	H	I	J	K	L	M	N	O
+q	Q	R	S	T	U	V	W	X	Y	Z	A	B	C	D	E	F	G	H	I	J	K	L	M	N	O	P
+r	R	S	T	U	V	W	X	Y	Z	A	B	C	D	E	F	G	H	I	J	K	L	M	N	O	P	Q
+s	S	T	U	V	W	X	Y	Z	A	B	C	D	E	F	G	H	I	J	K	L	M	N	O	P	Q	R
+t	T	U	V	W	X	Y	Z	A	B	C	D	E	F	G	H	I	J	K	L	M	N	O	P	Q	R	S
+u	U	V	W	X	Y	Z	A	B	C	D	E	F	G	H	I	J	K	L	M	N	O	P	Q	R	S	T
+v	V	W	X	Y	Z	A	B	C	D	E	F	G	H	I	J	K	L	M	N	O	P	Q	R	S	T	U
+w	W	X	Y	Z	A	B	C	D	E	F	G	H	I	J	K	L	M	N	O	P	Q	R	S	T	U	V
+x	X	Y	Z	A	B	C	D	E	F	G	H	I	J	K	L	M	N	O	P	Q	R	S	T	U	V	W
+y	Y	Z	A	B	C	D	E	F	G	H	I	J	K	L	M	N	O	P	Q	R	S	T	U	V	W	X
+z	Z	A	B	C	D	E	F	G	H	I	J	K	L	M	N	O	P	Q	R	S	T	U	V	W	X	Y
+The row labels in bold are the key letters. The column labels in bold are the plaintext letters.
+
+Vigenere Cipher requires a key as long as the message to encrypt. Usually, the key is a repeating keyword. For example, if the keyword is "keyword" and the message is 17 letters long, the key is "keywordkeywordkey." The encryption process is simple. For each letter in the plaintext, the plaintext letter determines the column of the table (the column is identified by the first letter), and the key determines the row (the row is identified by the first letter). The cipher letter is at the intersection of the row and column. For example, take the letter "t" and encrypt with the corresponding key letter "k," the ciphered text is "d." To decrypt a ciphered letter with the associated key letter: the key letter determines the row, and the plaintext is the first letter of the column containing the ciphered letter. Here is a full message encryption:
+
+plaintext	 thequickbrownfoxjumpsoverthelazydog
+key	 keywordkeywordkeywordkeywordkeywo
+cipher	 dlcmizfufpkkeiybhqagvyzcnhyhvexuryk
+The method of breaking this cipher is to divide and conquer. Theoretically, repeatedly occurring ciphertext segment would indicate that the keyword loops around at that location. However, that segment must be repeated for many times because different key letters can generate identical ciphertext in the Vigenere cipher. If the repeated segments truly indicate the location where the keyword loops, then the attacker could find the distance between each repeated instance and have a reasonable guess at the length of the keyword (for example, the Kasiski/Kerckhoff Method). Once the keyword length is known, the attacker can attack each Caesar Cipher independently using letter frequency analysis. For example, if the keyword length is nine, then the attacker knows that the first letter, the tenth letter, the 19th letter, etc. are encrypted with the same Caesar Cipher. Using this method, the attacker can associate cipher text with each letter of the key. Since each letter of the key associated with a Caesar Cipher, the attacker now can gather letters for each Caesar Cipher and breaks them individually.
+Eventually, autokey was incorporated into the cipher. It means the message itself would be appended to the end of the keyword to create the full key. The extra letters would be truncated. For example:
+
+plaintext	 thequickbrownfoxjumpsoverthelazydog
+keyword	 keyword
+key	 keywordthequickbrownfoxjumpsoverthe
+The Vigenere Cipher was considered to be unbreakable for 300 years. It earned the reputation of being the "le chiffre indéchiffrable," which means the "the indecipherable cipher." In 1917, the "Scientific American" magazine described the Vigenère cipher as "impossible of translation." However, by the end of the 19th century, the Vigenere Cipher was entirely broken. It was represented during the Civil War of US when theUnion regularly broke Confederate codes which were encrypted with Vigenere Cipher.
